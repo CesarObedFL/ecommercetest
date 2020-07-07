@@ -21,7 +21,7 @@ class UserController extends Controller
                     'email' => $request->email,
                     'password' => bcrypt($request->password)
                 ]);
-        return response()->json($user, 201);
+        return response()->json(['user' => $user, 'message' => __('user.created')], 201);
     }
 
     public function show($id)
@@ -36,7 +36,7 @@ class UserController extends Controller
                     'email' => $request->email,
                     'password' => bcrypt($request->password)
                 ]);
-        return response()->json($user, 200);
+        return response()->json(['user' => $user, 'message' => __('user.edited')], 200);
     }
 
     public function destroy($id)

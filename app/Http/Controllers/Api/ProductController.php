@@ -23,7 +23,7 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'status' => 1
             ]);
-        return response()->json($product, 201);
+        return response()->json(['product' => $product, 'message' => __('product.created')], 201);
     }
 
     public function show($id)
@@ -39,7 +39,7 @@ class ProductController extends Controller
                 'description'=> $request->description,
                 'price' => $request->price,
             ]);
-        return response()->json($product, 200);
+        return response()->json(['product' => $product, 'message' => __('product.edited')], 200);
     }
 
     public function destroy($id)

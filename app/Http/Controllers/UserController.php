@@ -31,7 +31,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password)
             ]);
-        return redirect()->action('UserController@index')->with('success','User created successfully!...');
+        return redirect()->action('UserController@index')->with('success',__('user.created'));
     }
 
     public function show($user_name)
@@ -53,13 +53,13 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password)
             ]);
-        return redirect()->action('UserController@show', $request->name)->with('edit', 'User modified successfully...');
+        return redirect()->action('UserController@show', $request->name)->with('edit', __('user.edited'));
     }
 
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
-        return redirect()->action('UserController@index')->with('delete','User deleted successfully...');
+        return redirect()->action('UserController@index')->with('delete', __('user.deleted'));
 
     }
 }

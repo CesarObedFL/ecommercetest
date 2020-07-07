@@ -22,16 +22,16 @@ class CartController extends Controller
 
     public function getCart() 
     {
-        return session()->get('cart');
+        return session('cart');
     }
 
     public function addToCart($id) 
     {
         $product = Product::findOrFail($id);
         if(!$product) {
-            return redirect()->action('HomeController@index')->with('errors', 'Product does not exist!...');
+            return redirect()->action('HomeController@index')->with('errors', __('product.nonexistent'));
         }
-        $cart = session()->get('cart');
+        $cart = session('cart');
         // if cart is empty then this the first product
         if(!$cart) {
             $cart = [
@@ -44,7 +44,7 @@ class CartController extends Controller
                     ]
             ];
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!...');
+            return redirect()->back()->with('success', __('product.added'));
         }
  
         // if cart not empty then check if this product exist then increment quantity
@@ -52,7 +52,7 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
             $cart[$id]['subtotal'] = $cart[$id]['price'] * $cart[$id]['quantity'];
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully...');
+            return redirect()->back()->with('success', __('product.added'));
         }
         // if item not exist in cart then add to cart with quantity = 1
         $cart[$id] = [
@@ -63,7 +63,7 @@ class CartController extends Controller
             "subtotal" => $product->price
         ];
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully...');
+        return redirect()->back()->with('success', __('product.added'));
     }
 
     public function updateItem(Request $request)
@@ -74,8 +74,7 @@ class CartController extends Controller
             $cart[$id]["quantity"] = $request->quantity;
             $cart[$id]['subtotal'] = $cart[$id]['price'] * $cart[$id]['quantity'];
             session()->put('cart', $cart);
-            $response = ['edit' => true,'message' => 'Quantity updated successfully!...'];
-            return response()->json($response, 200);
+            return response()->json(['edit' => true,'message' => __('product.increaseQtty')], 200);
         }
     }
 

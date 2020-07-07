@@ -17,13 +17,13 @@ class AuthController extends Controller
                     'email' => $request->email,
                     'password' => bcrypt($request->password)
                 ]);
-        return response()->json(['message' => 'User created successfully...'], 201);
+        return response()->json(['message' => __('user_created')], 201);
     }
 
     public function login(ApiLoginRequest $request)
     {
     	if(!auth()->attempt($request->all())) {
-    		return response()->json(['message' => 'Invalid credentials...'], 401);
+    		return response()->json(['message' => __('credentials.invalid')], 401);
     	}
 
     	$accessToken = auth()->user()->createToken('authToken')->accessToken;
@@ -37,6 +37,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
     	$request->user()->token()->revoke();
-        return response()->json(['message' => 'Logged out successfully...']);
+        return response()->json(['message' => __('log.logout')]);
     }
 }

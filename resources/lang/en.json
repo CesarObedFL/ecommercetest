@@ -1,0 +1,13 @@
+{
+	"log.logout"			: 	"Logged out successfully...",
+	"credentials.invalid" 	: 	"Invalid credentials...",
+	"user.created" 	  		: 	"User created successfully!...",
+	"user.edited" 			: 	"User edited successfully...",
+	"user.deleted" 			: 	"User deleted successfully...",
+	"product.created" 		: 	"Product created successfully!...",
+	"product.edited"  		: 	"Product edited successfully!...",
+	"product.deleted" 		: 	"Product deleted successfully!...",
+	"product.nonexistent"	:	"Product does not exist!...",
+	"product.added"			: 	"Product added to cart successfully!...",
+	"product.increaseQtty"	:	"Quantity updated successfully!..."
+}

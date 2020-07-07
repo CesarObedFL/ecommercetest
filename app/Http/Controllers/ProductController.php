@@ -32,7 +32,7 @@ class ProductController extends Controller
         if ($request->has('image')) {
             $product->addMediaFromRequest('image')->toMediaCollection('images');
         }
-        return redirect()->action('HomeController@index')->with('success', 'Product created successfully');
+        return redirect()->action('HomeController@index')->with('success', __('product.created'));
     }
 
     public function show($product_slug)
@@ -51,12 +51,12 @@ class ProductController extends Controller
     {
         $request->request->add(['slug' => Str::slug($request->name)]);
         Product::where('id',$id)->update($request->except('_token','_method'));
-        return redirect()->action('ProductController@show',$request->slug)->with('edit','Product edited successfully!...');
+        return redirect()->action('ProductController@show',$request->slug)->with('edit',__('product.edited'));
     }
 
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
-        return redirect()->action('HomeController@index')->with('delete', 'Product deleted successfully!...');
+        return redirect()->action('HomeController@index')->with('delete', __('product.deleted'));
     }
 }
